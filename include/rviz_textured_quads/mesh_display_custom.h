@@ -132,6 +132,7 @@ private:
   RosTopicProperty* image_topic_property_;
   TfFrameProperty* tf_frame_property_;
   FloatProperty* meters_per_pixel_property_;
+  FloatProperty* canvas_mesh_high_property_;
   ros::Subscriber image_sub_;
 
   std::vector<shape_msgs::Mesh> last_meshes_;

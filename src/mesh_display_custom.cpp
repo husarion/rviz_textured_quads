@@ -94,6 +94,9 @@ MeshDisplayCustom::MeshDisplayCustom()
 
   meters_per_pixel_property_ = new FloatProperty("Meters per pixel", 0.002,
       "Rviz meters per image pixel.", this);
+  
+  canvas_mesh_high_property_ = new FloatProperty("Canvas mesh high", 0.002,
+      "Rviz canvas mesh high.", this);
 }
 
 MeshDisplayCustom::~MeshDisplayCustom()
@@ -294,12 +297,14 @@ void MeshDisplayCustom::constructQuads(const sensor_msgs::Image::ConstPtr& image
     mesh_origin.orientation.w = xz_quat.w();
 
     const float meters_per_pixel = meters_per_pixel_property_->getFloat();
+    const float canvas_high = canvas_mesh_high_property_->getFloat();
+
     float width = 1.0;
     float height = 1.0;
     if (meters_per_pixel > 0)
     {
       width = image->width * meters_per_pixel;
-      height = image->height * meters_per_pixel;
+      height = image->height * canvas_high;
     }
     else
     {
